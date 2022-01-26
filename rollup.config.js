@@ -6,8 +6,12 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
+import copy from 'rollup-plugin-copy';
+
+import path from 'path';
 
 const production = !process.env.ROLLUP_WATCH;
+const cesiumBuildPath = 'node_modules/cesium/Build/Cesium'
 
 function serve() {
 	let server;
@@ -58,6 +62,14 @@ export default {
 		resolve({
 			browser: true,
 			dedupe: ['svelte']
+		}),
+		copy({
+			targets: [
+				{ src: path.join(cesiumBuildPath, 'Assets'), dest: 'public/build/' },
+				{ src: path.join(cesiumBuildPath, 'ThirdParty'), dest: 'public/build/' },
+				{ src: path.join(cesiumBuildPath, 'Widgets'), dest: 'public/build/' },
+				{ src: path.join(cesiumBuildPath, 'Workers'), dest: 'public/build/' },
+			]
 		}),
 		commonjs(),
 		typescript({
