@@ -63,9 +63,16 @@ button:focus {
 }
 
 html, body, #cesiumContainer {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
+	height: 100%; margin: 0; padding: 0; overflow: hidden;
+  }
+  .cesium-viewer-toolbar, /* upper right button group */
+  .cesium-viewer-animationContainer, /* Animation control in the lower left corner */
+  .cesium-viewer-timelineContainer, /* timeline */
+  .cesium-viewer-bottom /* logo information */
+  {
+  display: none;
+  }
+  .cesium-viewer-fullscreenContainer /* Fullscreen button */
+  {
+  position: absolute; top: -999em;
+  }
